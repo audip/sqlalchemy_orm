@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="005e55b7-ed45-40b1-8dd8-8dca455a34d4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connecting.py" afterPath="$PROJECT_DIR$/connecting.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/declare_mapping.py" afterPath="$PROJECT_DIR$/declare_mapping.py" />
     </list>
     <ignored path="sqlalchemy_tutorial.iws" />
@@ -29,9 +29,11 @@
       <file leaf-file-name="connecting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/connecting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="15">
+              <caret line="1" column="39" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -39,8 +41,8 @@
       <file leaf-file-name="declare_mapping.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/declare_mapping.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="105" selection-start-line="20" selection-start-column="105" selection-end-line="20" selection-end-column="105" />
+            <state relative-caret-position="270">
+              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
               </folding>
@@ -408,16 +410,18 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/connecting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="15">
+          <caret line="1" column="39" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/declare_mapping.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="105" selection-start-line="20" selection-start-column="105" selection-end-line="20" selection-end-column="105" />
+        <state relative-caret-position="270">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
           </folding>
