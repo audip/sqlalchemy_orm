@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, or_
 from connecting import session, engine
 
 
@@ -16,7 +16,7 @@ class User(Base):
     def __repr__(self):
         return "<User(name='%s', fullname='%s', password='%s')>" % \
                (self.name, self.fullname, self.password)
-    
+
 def create_tables():
     Base.metadata.create_all(engine)
 
@@ -30,12 +30,14 @@ def create_users():
     new_user.password = 'strongpassword'
 
 def fetch_user():
-    fetched_user = session.query(User).filter_by(name='Aditya').first()
+    #fetched_user = session.query(User).filter_by(name='Aditya').first()
+    fetched_user = session.query(User).filter(or_(User.name.like('%Ad%')), User.fullname != 'Anand').one()
     print "<User(name='%s', fullname='%s', password='%s')>" % \
           (fetched_user.name, fetched_user.fullname, fetched_user.password)
 
 def fetch_users():
     fetched_users = session.query(User).all()
+    print "No. of users fetched: %d " % (session.query(User).count())
     for each_user in fetched_users:
         print "<User(name='%s', fullname='%s', password='%s')>" % \
               (each_user.name, each_user.fullname, each_user.password)
@@ -43,5 +45,6 @@ def fetch_users():
 if __name__ == '__main__':
     create_tables()
     create_users()
-    fetch_users()
+    print "Fetch a user: %s" % (fetch_user())
+    print "Fetching users: %s" % (fetch_users())
     session.commit()
