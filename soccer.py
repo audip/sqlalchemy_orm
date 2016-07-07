@@ -1,13 +1,8 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, func, create_engine
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, backref, sessionmaker
-
+from connect_mysql import engine, session
 
 Base = declarative_base()
-engine = create_engine('mysql://root:@192.168.14.4/sqlalchemy', echo=True, pool_recycle=3600)
-Session = sessionmaker(bind=engine)
-session = Session()
-
 
 def setup_tables():
 
