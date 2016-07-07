@@ -64,7 +64,8 @@ def insert_player(jersey_number):
     res = session.query(Player).filter(Player.jersey_number == jersey_number).first()
     pos = res.position
     if check_positions(pos):
-        player_info = session.query(Player).filter(Player.position == pos).first()
+        player_info = session.query(Player).filter(Player.position == pos).\
+            filter(Player.jersey_number == jersey_number).first()
         # Add player to table
         fresh_player = Squad(player_info.jersey_number, player_info.position)
         session.add(fresh_player)
@@ -106,9 +107,10 @@ if __name__ == '__main__':
     insert_player(11)
 
     session.commit()
-    #
-    # team.remove_player(11)
-    # team.insert_player(12)
-    #
-    # session.commit()
+
+    remove_player(11)
+    insert_player(12)
+
+    session.commit()
+
     session.close()
