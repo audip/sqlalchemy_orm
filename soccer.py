@@ -14,7 +14,7 @@ def setup_tables():
     Base.metadata.create_all(engine)
 
     # Add dream team for mock data
-    session.add_all(
+    session.add_all([
         Player("Aditya", 10, "forward"),
         Player("Ronaldo", 7, "forward"),
         Player("Bale", 11, "forward"),
@@ -27,7 +27,7 @@ def setup_tables():
         Player("De Gea", 1, "defense"),
         Player("Pepe", 2, "defense"),
         Player("Darmian", 4, "defense")
-    )
+    ])
     session.commit()
 
 
@@ -51,58 +51,64 @@ class Squad(Base):
     __tablename__ = "squad"
 
     id = Column(Integer, primary_key=True)
-    jersey_number = Column(Integer, ForeignKey("players.jersey_number"))
-    position = Column(String(20), ForeignKey("players.position"))
+    squad_jersey_number = Column(Integer, ForeignKey('players.jersey_number'))
+    squad_position = Column(String(20), ForeignKey('players.position'))
 
-    player = relationship("Player", backref=backref("squad"))
+    def __init__(self, jersey_number, position):
+        self.squad_jersey_number = jersey_number
+        self.squad_position = position
 
-    def insert_player(self, jersey_number):
-        # check_position for player
-        res = session.query(Squad).filter(Squad.jersey_number==jersey_number).first()
-        pos = res.position
-        if self.check_positions(pos):
-            fresh_player = session.query(Squad).filter(Squad.position == pos).first()
-            session.add(fresh_player)
-            session.commit()
+
+def insert_player(jersey_number):
+    # check_position for player
+    res = session.query(Player).filter(Player.jersey_number == jersey_number).first()
+    pos = res.position
+    if check_positions(pos):
+        player_info = session.query(Player).filter(Player.position == pos).first()
         # Add player to table
+        fresh_player = Squad(player_info.jersey_number, player_info.position)
+        session.add(fresh_player)
 
-    def remove_player(self, jersey_number):
-        # delete the player
-        tired_player = session.query(Squad).filter(Squad.jersey_number==jersey_number).first()
-        session.delete(tired_player)
-        session.commit()
 
-    def check_positions(self, position):
-        # return true if player can be added, false otherwise
-        # fetch count of players in position
-        formation = {
-            'forward': 3,
-            'midfield': 4,
-            'defense': 4}
-        position_count = session.query(func.count(Squad.id)).filter(Squad.position == position)
-        if formation[position] >= position_count:
-            return True
-        else:
-            return False
+def remove_player(jersey_number):
+    # delete the player
+    tired_player = session.query(Squad).filter(Squad.squad_jersey_number == jersey_number).first()
+    session.delete(tired_player)
 
-if __name__=='__main__':
-    setup_tables()
 
-    team = Squad()
+def check_positions(position):
+    # return true if player can be added, false otherwise
+    formation = {
+        'forward': 3,
+        'midfield': 4,
+        'defense': 4}
+    position_count = session.query(Squad).filter(Squad.squad_position == position).count()
 
-    team.insert_player(1)
-    team.insert_player(2)
-    team.insert_player(3)
-    team.insert_player(4)
-    team.insert_player(5)
-    team.insert_player(6)
-    team.insert_player(7)
-    team.insert_player(8)
-    team.insert_player(9)
-    team.insert_player(10)
-    team.insert_player(11)
+    if formation[position] > position_count:
+        return True
+    else:
+        return False
 
-    team.remove_player(11)
-    team.insert_player(12)
 
+if __name__ == '__main__':
+    # setup_tables()
+
+    insert_player(1)
+    insert_player(2)
+    insert_player(3)
+    insert_player(4)
+    insert_player(5)
+    insert_player(6)
+    insert_player(7)
+    insert_player(8)
+    insert_player(9)
+    insert_player(10)
+    insert_player(11)
+
+    session.commit()
+    #
+    # team.remove_player(11)
+    # team.insert_player(12)
+    #
+    # session.commit()
     session.close()
